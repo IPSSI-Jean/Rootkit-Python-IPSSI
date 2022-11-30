@@ -23,6 +23,13 @@ Le projet répartis sur 2 fichiers : ```Client-Victime.py``` et ```Serveur-Attaq
   - Recv archive : Télécharge des fichiers depuis la victime.
   - Help : Liste les commandes possibles
 
+# Axes d'améliorations du code
+Après la phase de réalisation du projet, le professeur nous a demandé une personnalisation du code afin d'améliorer ce dernier.
+
+Pour ce projet, les améliorations suivantes ont été mises en place :
+
+- ...
+
 # Environnement de travail
 
 Il est recommandé d'exécuter ce programme dans un environnement virtuel, il est possible d'en mettre un en place à l'aide des logiciels suivants : 
