@@ -1,7 +1,13 @@
 # Rootkit-Python-IPSSI
 
 <!-- Image centrée -->
+
+<div align="center">
+
 ![CAPTURE](https://zupimages.net/up/22/48/9z79.png)
+
+</div>
+
 <!-- --------------------------- -->
 
 **Rootkit-Python-IPSSI** a été réalisé dans le cadre pédagogique de l'IPSSI avec un projet sur 1,5 jours. 
