@@ -36,7 +36,7 @@ Le projet repose sur 2 fichiers Python et 1 fichier de test :
 
 - ```Serveur-Attaquant.py``` --> Qui contient le code serveur ( attaquant ) qui ouvrira connection TCP.
 
-- ```test.txt``` --> Pour tester l'exfiltration de fichiers.
+- ```test.txt``` --> Pour tester l'exfiltration de fichiers. ( a placer quelque part sur le système )
 
 ### Fonctionnement du projet
 
@@ -53,6 +53,7 @@ Plusieurs commandes sont possibles depuis le serveur attaquant :
 - **exit** : Arrête le malware coté victime
 - **recv_archive** : Exfiltre des fichiers depuis la victime en les copiant, la victime ne voit rien.
 - **help** : Liste les commandes possibles
+- **popup** : Déclanche une popup chez la victime
 
 ### Mise en réseau
 Ce projet se déroule entièrement en **local**.
@@ -94,11 +95,12 @@ def __init__(self, SHELL_PYTHON):
 ```
 La première fonction **verification** permet de définir les commandes côté attaquant, afin de contrôler la victime, 
 
->Pour rappel il y a 4 commandes :
+>Pour rappel il y a 5 commandes :
 >- **shell** : Pour avoir accès au shell de la victime
 >- **exit** : Arrête le malware coté victime
 >- **recv_archive** : Exfiltre des fichiers depuis la victime en les copiant, la victime ne voit rien.
 >- **help** : Liste les commandes possibles
+>- **popup** : Déclanche une popup chez la victime
 
 ```python
 def verifications(SHELL_PYTHON):
@@ -285,7 +287,7 @@ def send_archive(DATA):
     s.close()
 ```
 
-La troisième fonction **popupclient** permet l'affichage d'une popup côté client, l'action déclanché par l'attaquant. L'affichage se réalise 5 fois.
+La troisième fonction **popup** permet l'affichage d'une popup côté client, l'action déclanché par l'attaquant. L'affichage se réalise 5 fois.
 
 ```python
     #Popupclient client
