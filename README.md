@@ -57,14 +57,13 @@ Plusieurs commandes sont possibles depuis le serveur attaquant :
 ### Mise en réseau
 Ce projet se déroule entièrement en **local**.
 
-# Axes d'améliorations du code
-Après la phase de réalisation du projet, le professeur nous a demandé une personnalisation du code afin d'améliorer ce dernier.
+# Avancement du projet
 
-Pour ce projet, les améliorations suivantes ont été mises en place :
 
-- [ ] Transfert automatique de répertoires / fichiers avec des preset prédéfinis
+- [x] Création du shell côté attaquant
+- [x] Mise en place de l'exfiltration de fichiers de la victime
+- [x] Mise en place de l'exécution du shell de la victime depuis l'attaquant
 - [ ] Amélioration de l'interface shell côté attaquant pour proposer une solution interactive 
-- [ ] Correction de l'encodage UTF-8 sur Windows
 - [ ] Mineur de cryptomonnaies en fond
 
 
