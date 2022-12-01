@@ -15,9 +15,6 @@
 
 >Un rootkit est un package de logiciels malveillants conçu pour permettre à un intrus d'obtenir un accès non autorisé à un ordinateur ou à un réseau. **Il permet une exécution de code à distance.**
 
-**Pour un meilleur confort, veuillez vous rendre sur https://github.com/IPSSI-Jean/Virus-Python-IPSSI pour avoir une vue globale sur le projet et sur l'affichage du README**
-
-
 # Prérequis
 - Visual studio code
 
