@@ -30,7 +30,7 @@ Il est recommandé d'exécuter ce programme dans un environnement virtuel, il es
 
 ### Dépendances
 
->Le projet ne nécessite aucune dépendances.
+>Le projet ne nécessite aucunes dépendances.
 
 ### Architecture du projet 
 
