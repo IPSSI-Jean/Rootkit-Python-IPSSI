@@ -28,6 +28,10 @@ Il est recommandé d'exécuter ce programme dans un environnement virtuel, il es
 
 # Description du projet
 
+### Dépendances
+
+>Le projet ne nécessite aucunes dépendances.
+
 ### Architecture du projet 
 
 Le projet repose sur 2 fichiers Python et 1 fichier de test : 
