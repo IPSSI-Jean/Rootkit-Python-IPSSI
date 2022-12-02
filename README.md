@@ -10,11 +10,9 @@
 
 <!-- --------------------------- -->
 
-
 **Rootkit-Python-IPSSI** a été réalisé dans le cadre pédagogique de l'IPSSI avec un projet sur 1,5 jours. 
 
 >Un rootkit est un package de logiciels malveillants conçu pour permettre à un intrus d'obtenir un accès non autorisé à un ordinateur ou à un réseau. **Il permet une exécution de code à distance.**
-
 
 # Prérequis
 - Visual studio code
@@ -29,6 +27,14 @@ Il est recommandé d'exécuter ce programme dans un environnement virtuel, il es
 - ...
 
 # Description du projet
+
+## Dépendances
+
+Le projet nécessite l'installation de dépendances Python, ces dernières sont disponibles dans le fichier ```requirements.txt```.
+
+```
+pip install -r requirements.txt
+```
 
 ### Architecture du projet 
 
@@ -69,8 +75,7 @@ Ce projet se déroule entièrement en **local**.
 - [ ] Amélioration de l'interface shell côté attaquant pour proposer une solution interactive 
 - [ ] Mineur de cryptomonnaies en fond
 
-
-### Mise en place de l'environement de travail
+# Mise en place de l'environement de travail
 
 Il est conseillé, pour travailler dans de bonnes conditions, d’ouvrir un **répertoire de travail** ( sur le bureau ou autre ) sur Visual Studio Code
 
